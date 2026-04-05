@@ -62,6 +62,7 @@ VideoContrastive/
         ├── models.py
         ├── train.py
         └── umap_visualization.py
+```
 
 ### Main Files
 
