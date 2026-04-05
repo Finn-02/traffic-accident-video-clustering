@@ -82,9 +82,6 @@ VideoContrastive/
   Defines the contrastive loss used during training.
 
 * **train.py**
-  Single-GPU training, clustering, and visualization pipeline.
-
-* **train_DDP.py**
   Multi-GPU training, clustering, and visualization pipeline. This is the main script for reproducing the core experiments.
 
 * **umap_visualization.py**
@@ -276,7 +273,7 @@ The current implementation keeps only these DETR labels:
 
 ## 3. Contrastive Training, Clustering, and Visualization
 
-The main experiment script is `train_DDP.py`.
+The main experiment script is `train.py`.
 
 It performs:
 
@@ -293,12 +290,12 @@ It performs:
 ### Recommended Multi-GPU Command
 
 ```bash
-torchrun --nproc_per_node=2 train_DDP.py \
+torchrun --nproc_per_node=2 train.py \
   --frame 16 \
   --img_size 224 \
   --dataset_dir /path/to/video_obj_resized \
   --epochs 100 \
-  --batch_size 64 \
+  --batch_size 32 \
   --num_workers 8 \
   --model_name ViViT \
   --framework_name moco3 \
@@ -307,7 +304,7 @@ torchrun --nproc_per_node=2 train_DDP.py \
   --original_video_dir /path/to/video_original
 ```
 
-### Available `--model_name` options in `train_DDP.py`
+### Available `--model_name` options in `train.py`
 
 * `ViViT`
 * `R3D18`
@@ -329,32 +326,6 @@ torchrun --nproc_per_node=2 train_DDP.py \
 * `--save_dir` : output directory for experiment results
 * `--output_dim` : output feature dimension of the representation head
 * `--original_video_dir` : optional path to the original videos for representative video extraction after clustering
-
-### Single-GPU Option
-
-If you want to run the single-GPU version:
-
-```bash
-python train.py \
-  --frame 16 \
-  --img_size 224 \
-  --dataset_dir /path/to/video_obj_resized \
-  --epochs 100 \
-  --batch_size 64 \
-  --num_workers 8 \
-  --model_name ViViT \
-  --framework_name moco3 \
-  --save_dir /path/to/experiments/moco3_ViViT_100 \
-  --output_dim 4 \
-  --original_video_dir /path/to/video_original
-```
-
-### Available `--model_name` options in `train.py`
-
-* `ViViT`
-* `R3D18`
-* `MC3_18`
-* `R2Plus1D_18`
 
 ---
 
@@ -514,7 +485,7 @@ For full reproduction, the recommended order is:
 3. Run python createDataset.py
 4. Edit paths in objectDetection.py
 5. Run python objectDetection.py
-6. Run train_DDP.py or train.py
+6. Run train.py
 7. Inspect silhouette score, cluster CSV, and UMAP projection
 8. Optionally extract representative videos
 9. If metadata merge is available, run the coarse analysis scripts
@@ -529,12 +500,12 @@ If you only want the core experiment pipeline, use this order:
 ```bash
 python createDataset.py
 python objectDetection.py
-torchrun --nproc_per_node=2 train_DDP.py \
+torchrun --nproc_per_node=2 train.py \
   --frame 16 \
   --img_size 224 \
   --dataset_dir /path/to/video_obj_resized \
   --epochs 100 \
-  --batch_size 64 \
+  --batch_size 32 \
   --num_workers 8 \
   --model_name ViViT \
   --framework_name moco3 \
@@ -551,9 +522,7 @@ torchrun --nproc_per_node=2 train_DDP.py \
 
 * `objectDetection.py` is currently written for **2 GPUs**.
 
-* `train_DDP.py` is the recommended script for the main experiments.
-
-* `train.py` provides a simpler single-GPU alternative.
+* `train.py` is the recommended script for the main experiments.
 
 * The basic public pipeline of this repository is:
 
