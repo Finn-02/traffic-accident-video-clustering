@@ -1,4 +1,3 @@
-````markdown
 # Traffic Accident Video Analysis using MoCo v3 and Object Detection
 
 Self-supervised traffic accident video analysis using **MoCo v3**, **object detection-based filtering**, and **cluster-based scenario analysis** on the **AIHub traffic accident video dataset**.
