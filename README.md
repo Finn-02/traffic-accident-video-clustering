@@ -34,25 +34,34 @@ The overall pipeline is:
 - Optional **coarse-grained label analysis** for cluster interpretation
 
 ---
-
 ## Repository Structure
 
 ```bash
-.
-├── createDataset.py
-├── objectDetection.py
-├── dataloader.py
-├── models.py
-├── losses.py
-├── train.py
-├── train_DDP.py
-├── umap_visualization.py
-├── extract_video.py
-├── build_analysis_table_coarse.py
-├── plot_first_order_coarse.py
-├── plot_second_order_coarse.py
-└── cluster_signature_analysis.py
-````
+VideoContrastive/
+├── data/
+│   ├── Datasets/
+│   │   ├── createDataset.py
+│   │   └── objectDetection.py
+│   └── analysis/
+│       ├── build_analysis_table_coarse.py
+│       ├── cluster_signature_analysis.py
+│       ├── plot_first_order_coarse.py
+│       └── plot_second_order_coarse.py
+└── code/
+    ├── moco3/
+    │   ├── dataloader.py
+    │   ├── extract_video.py
+    │   ├── losses.py
+    │   ├── models.py
+    │   ├── train.py
+    │   └── umap_visualization.py
+    └── simclr/
+        ├── dataloader.py
+        ├── extract_video.py
+        ├── losses.py
+        ├── models.py
+        ├── train.py
+        └── umap_visualization.py
 
 ### Main Files
 
