@@ -554,14 +554,3 @@ If you use this repository in your research, please cite the corresponding paper
 ## Acknowledgement
 
 This work is based on the **AIHub traffic accident video dataset** and studies self-supervised video representation learning, clustering, and cluster interpretation for traffic accident analysis.
-
-```
-
-그리고 바로 같이 넣기 좋은 항목은 이렇게 쓰면 됩니다.
-
-**Repository name**  
-`traffic-accident-video-analysis`
-
-**Description**  
-`Self-supervised traffic accident video analysis using MoCo v3, object detection, and cluster-based scenario analysis on AIHub videos.`
-```
